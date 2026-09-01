@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="JARVIS Workbench — the AI-powered developer workspace for Hareeshwar" />
+  <title>JARVIS Workbench</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="shared/css/tokens.css" />
+  <link rel="stylesheet" href="shared/css/workbench.css" />
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <header class="header">
+    <div class="logo">
+      <span class="logo-icon">⬡</span>
+      <span class="logo-text">J.A.R.V.I.S</span>
+    </div>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#projects" class="nav-link">Projects</a>
+      <a href="#templates" class="nav-link">Templates</a>
+      <a href="#status" class="nav-link">Status</a>
+    </nav>
+    <div class="header-badge">
+      <span class="status-dot"></span>
+      <span>Online</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-bg"></div>
+      <div class="hero-content">
+        <p class="hero-eyebrow">JARVIS Workbench v2.0</p>
+        <h1 id="hero-title" class="hero-title">
+          Good evening,<br />
+          <span class="gradient-text">Hareeshwar.</span>
+        </h1>
+        <p class="hero-subtitle">
+          All systems operational. Your AI developer workspace is ready.<br />
+          What shall we build today?
+        </p>
+        <div class="hero-actions">
+          <a href="projects/" class="btn btn-primary" id="btn-projects">View Projects</a>
+          <a href="templates/" class="btn btn-ghost" id="btn-templates">Browse Templates</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <span class="stat-value" id="stat-projects">0</span>
+          <span class="stat-label">Projects Built</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">3</span>
+          <span class="stat-label">Active Agents</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value">∞</span>
+          <span class="stat-label">Possibilities</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agents -->
+    <section class="section" id="agents" aria-labelledby="agents-title">
+      <div class="container">
+        <h2 id="agents-title" class="section-title">Active Agents</h2>
+        <p class="section-subtitle">Specialist AI modules ready to deploy</p>
+        <div class="agents-grid">
+          <div class="agent-card" id="agent-jarvis">
+            <div class="agent-icon" style="--agent-color: hsl(210, 100%, 56%)">⬡</div>
+            <h3 class="agent-name">JARVIS</h3>
+            <p class="agent-role">Primary Agent</p>
+            <p class="agent-desc">Full-stack developer. Plans, codes, tests, commits, and deploys your projects end-to-end.</p>
+            <div class="agent-tags">
+              <span class="tag">Build</span>
+              <span class="tag">Test</span>
+              <span class="tag">Deploy</span>
+            </div>
+          </div>
+          <div class="agent-card" id="agent-designer">
+            <div class="agent-icon" style="--agent-color: hsl(330, 100%, 72%)">◈</div>
+            <h3 class="agent-name">Designer</h3>
+            <p class="agent-role">UI/UX Specialist</p>
+            <p class="agent-desc">Creates stunning interfaces with modern CSS, dark mode palettes, animations, and responsive layouts.</p>
+            <div class="agent-tags">
+              <span class="tag">CSS</span>
+              <span class="tag">UI/UX</span>
+              <span class="tag">Animation</span>
+            </div>
+          </div>
+          <div class="agent-card" id="agent-debugger">
+            <div class="agent-icon" style="--agent-color: hsl(0, 100%, 65%)">◎</div>
+            <h3 class="agent-name">Debugger</h3>
+            <p class="agent-role">Code Quality Expert</p>
+            <p class="agent-desc">Traces bugs to root causes, reviews code quality, enforces TypeScript standards, and runs tests.</p>
+            <div class="agent-tags">
+              <span class="tag">Debug</span>
+              <span class="tag">Review</span>
+              <span class="tag">Test</span>
+            </div>
+          </div>
+          <div class="agent-card" id="agent-deployer">
+            <div class="agent-icon" style="--agent-color: hsl(145, 63%, 49%)">▲</div>
+            <h3 class="agent-name">Deployer</h3>
+            <p class="agent-role">DevOps Specialist</p>
+            <p class="agent-desc">Manages Git workflows, deploys to Vercel/Netlify, handles environment variables and CI/CD.</p>
+            <div class="agent-tags">
+              <span class="tag">Git</span>
+              <span class="tag">Vercel</span>
+              <span class="tag">CI/CD</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Templates -->
+    <section class="section section-alt" id="templates" aria-labelledby="templates-title">
+      <div class="container">
+        <h2 id="templates-title" class="section-title">Starter Templates</h2>
+        <p class="section-subtitle">Ready-to-use project starters — ask JARVIS to scaffold any of these</p>
+        <div class="templates-grid">
+          <a href="templates/landing-page/" class="template-card" id="tpl-landing">
+            <div class="template-preview template-landing"></div>
+            <div class="template-info">
+              <h3>Landing Page</h3>
+              <p>Hero, features, testimonials, CTA, footer</p>
+            </div>
+          </a>
+          <a href="templates/portfolio/" class="template-card" id="tpl-portfolio">
+            <div class="template-preview template-portfolio"></div>
+            <div class="template-info">
+              <h3>Portfolio</h3>
+              <p>About, projects grid, skills, contact form</p>
+            </div>
+          </a>
+          <a href="templates/dashboard/" class="template-card" id="tpl-dashboard">
+            <div class="template-preview template-dashboard"></div>
+            <div class="template-info">
+              <h3>Dashboard</h3>
+              <p>Sidebar nav, stats cards, charts, data tables</p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- System Status -->
+    <section class="section" id="status" aria-labelledby="status-title">
+      <div class="container">
+        <h2 id="status-title" class="section-title">System Status</h2>
+        <div class="status-grid">
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">opencode</span>
+            <span class="status-value">v1.18.25</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">Ollama</span>
+            <span class="status-value">v0.33.2</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">qwen3:8b</span>
+            <span class="status-value">5.2 GB</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">Vite</span>
+            <span class="status-value">v5.4</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-mcp"></span>
+            <span class="status-name">MCP Filesystem</span>
+            <span class="status-value">Ready</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-mcp"></span>
+            <span class="status-name">MCP GitHub</span>
+            <span class="status-value">Needs Token</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">MCP Puppeteer</span>
+            <span class="status-value">Ready</span>
+          </div>
+          <div class="status-item">
+            <span class="status-dot status-online"></span>
+            <span class="status-name">Antigravity</span>
+            <span class="status-value">Active</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>J.A.R.V.I.S. Workbench — Built for Hareeshwar &middot; <span id="footer-year"></span></p>
+  </footer>
+
+  <script type="module" src="shared/css/../js/workbench.js"></script>
+</body>
+</html>
