@@ -1,4 +1,4 @@
-{
+﻿{
   "version": 2,
   "builds": [
     {
@@ -12,12 +12,16 @@
     {
       "src": "vercel-dashboard/app/api/**/*.ts",
       "use": "@vercel/next"
+    },
+    {
+      "src": "vercel-dashboard/app/api/**/*.js",
+      "use": "@vercel/next"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "vercel-dashboard/$1"
+      "dest": "vercel-dashboard/"
     }
   ]
 }
