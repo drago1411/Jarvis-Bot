@@ -1,5 +1,6 @@
 import { filesystemTools } from './filesystem.js';
 import { shellTools } from './shell.js';
+import { webTools } from './web.js';
 import type { ToolDefinition } from '../types.js';
 import type { ChatCompletionTool } from 'openai/resources/chat/completions.js';
 
@@ -9,6 +10,7 @@ import type { ChatCompletionTool } from 'openai/resources/chat/completions.js';
 export const allTools: ToolDefinition[] = [
   ...filesystemTools,
   ...shellTools,
+  ...webTools,
 ];
 
 /**
