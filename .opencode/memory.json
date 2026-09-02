@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "updated": "2026-09-01T00:00:00.000Z",
+  "user": {
+    "name": "Hareeshwar",
+    "preferences": {
+      "stack": "Vite + Vanilla HTML/CSS/JS for simple sites; Next.js for complex apps",
+      "styling": "Vanilla CSS or CSS variables first; Tailwind only if asked",
+      "language": "TypeScript by default",
+      "commits": "Conventional commits format",
+      "outputFolder": "D:\\Jarvis\\workbench\\projects"
+    }
+  },
+  "projects": {},
+  "sessions": [],
+  "apiKeys": {
+    "braveSearch": "",
+    "github": "",
+    "vercel": ""
+  },
+  "learnedPatterns": {}
+}
