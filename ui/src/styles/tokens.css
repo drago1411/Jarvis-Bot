@@ -1,0 +1,71 @@
+/* ============================================
+   JARVIS Design Tokens
+   Iron Man HUD aesthetic
+   ============================================ */
+
+:root {
+  /* ── Colors ── */
+  --color-bg:         #06090f;
+  --color-bg-subtle:  #0c1018;
+  --color-surface:    #111827;
+  --color-surface-2:  #1a2332;
+  --color-border:     rgba(56, 189, 248, 0.12);
+  --color-border-bright: rgba(56, 189, 248, 0.3);
+
+  /* JARVIS blue spectrum */
+  --color-accent:     hsl(199, 89%, 58%);
+  --color-accent-dim: hsl(199, 70%, 40%);
+  --color-accent-glow: hsla(199, 89%, 58%, 0.15);
+  --color-accent-bright: hsl(199, 100%, 72%);
+
+  /* Status */
+  --color-success:    hsl(145, 63%, 49%);
+  --color-warning:    hsl(38, 92%, 55%);
+  --color-error:      hsl(0, 84%, 62%);
+
+  /* Text */
+  --color-text:       hsl(210, 40%, 92%);
+  --color-text-dim:   hsl(210, 20%, 55%);
+  --color-text-muted: hsl(210, 15%, 35%);
+
+  /* ── Typography ── */
+  --font-sans:  'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  --font-size-xs:   0.75rem;
+  --font-size-sm:   0.8125rem;
+  --font-size-base: 0.9375rem;
+  --font-size-lg:   1.125rem;
+  --font-size-xl:   1.5rem;
+  --font-size-2xl:  2rem;
+
+  /* ── Spacing ── */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+
+  /* ── Radius ── */
+  --radius-sm:  6px;
+  --radius-md:  10px;
+  --radius-lg:  16px;
+  --radius-xl:  24px;
+  --radius-full: 9999px;
+
+  /* ── Shadows ── */
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.4);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg:  0 8px 40px rgba(0, 0, 0, 0.6);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+  --shadow-glow-strong: 0 0 40px hsla(199, 89%, 58%, 0.25);
+
+  /* ── Transitions ── */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 150ms var(--ease-out);
+  --transition-base: 250ms var(--ease-out);
+  --transition-slow: 400ms var(--ease-out);
+}

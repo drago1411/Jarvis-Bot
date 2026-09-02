@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="J.A.R.V.I.S. — AI Developer Assistant" />
+  <title>J.A.R.V.I.S.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/src/styles/tokens.css" />
+  <link rel="stylesheet" href="/src/styles/jarvis.css" />
+</head>
+<body>
+  <!-- Scanline overlay -->
+  <div class="scanline" aria-hidden="true"></div>
+
+  <!-- HUD Frame -->
+  <div class="hud">
+
+    <!-- Header -->
+    <header class="hud-header" id="hud-header">
+      <div class="hud-logo">
+        <div class="arc-reactor" aria-hidden="true">
+          <div class="arc-core"></div>
+          <div class="arc-ring"></div>
+        </div>
+        <h1 class="hud-title">J.A.R.V.I.S.</h1>
+      </div>
+      <div class="hud-status">
+        <div class="status-indicator" id="status-indicator">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="status-text" id="status-text">Connecting...</span>
+        </div>
+        <span class="hud-model" id="hud-model"></span>
+      </div>
+    </header>
+
+    <!-- Main content area -->
+    <main class="hud-main">
+
+      <!-- Chat messages -->
+      <div class="chat-container" id="chat-container">
+        <div class="chat-messages" id="chat-messages">
+          <!-- Welcome message -->
+          <div class="message message-assistant" id="welcome-msg">
+            <div class="message-avatar">
+              <div class="avatar-jarvis">⬡</div>
+            </div>
+            <div class="message-body">
+              <span class="message-name">JARVIS</span>
+              <div class="message-content">
+                <p>Good evening, sir. All systems operational.</p>
+                <p>I'm ready to build, debug, test, and deploy — just tell me what you need.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Agent activity sidebar -->
+      <aside class="activity-panel" id="activity-panel">
+        <h2 class="panel-title">Agent Activity</h2>
+        <div class="activity-list" id="activity-list">
+          <div class="activity-empty">No activity yet</div>
+        </div>
+        <div class="panel-divider"></div>
+        <h2 class="panel-title">System</h2>
+        <div class="system-stats" id="system-stats">
+          <div class="stat-row">
+            <span class="stat-key">Status</span>
+            <span class="stat-val" id="sys-status">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">Model</span>
+            <span class="stat-val" id="sys-model">—</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">Tools</span>
+            <span class="stat-val" id="sys-tools">6</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-key">Messages</span>
+            <span class="stat-val" id="sys-messages">0</span>
+          </div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Input area -->
+    <footer class="hud-input" id="hud-input">
+      <form class="input-form" id="chat-form">
+        <div class="input-wrapper">
+          <input
+            type="text"
+            id="chat-input"
+            class="chat-input"
+            placeholder="Tell JARVIS what to build..."
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="Message JARVIS"
+          />
+          <button type="submit" class="send-btn" id="send-btn" aria-label="Send message">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+            </svg>
+          </button>
+        </div>
+        <div class="input-hint">
+          <span>Press <kbd>Enter</kbd> to send</span>
+          <span class="thinking-indicator hidden" id="thinking-indicator">
+            <span class="thinking-dot"></span>
+            <span class="thinking-dot"></span>
+            <span class="thinking-dot"></span>
+            JARVIS is thinking...
+          </span>
+        </div>
+      </form>
+    </footer>
+
+  </div>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
