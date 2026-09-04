@@ -69,3 +69,48 @@
   --transition-base: 250ms var(--ease-out);
   --transition-slow: 400ms var(--ease-out);
 }
+
+/* ── Iron Man Red & Gold Theme ── */
+[data-theme="stark-red"] {
+  --color-bg:         #0d0406;
+  --color-bg-subtle:  #15080c;
+  --color-surface:    #220d14;
+  --color-surface-2:  #33141f;
+  --color-border:     rgba(255, 75, 95, 0.18);
+  --color-border-bright: rgba(255, 75, 95, 0.4);
+  --color-accent:     hsl(350, 95%, 60%);
+  --color-accent-dim: hsl(350, 75%, 45%);
+  --color-accent-glow: hsla(350, 95%, 60%, 0.2);
+  --color-accent-bright: hsl(38, 100%, 65%); /* Gold accent */
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+}
+
+/* ── Cyberpunk Matrix Green Theme ── */
+[data-theme="matrix-green"] {
+  --color-bg:         #020b05;
+  --color-bg-subtle:  #05150a;
+  --color-surface:    #0a2211;
+  --color-surface-2:  #10351b;
+  --color-border:     rgba(0, 255, 102, 0.18);
+  --color-border-bright: rgba(0, 255, 102, 0.45);
+  --color-accent:     hsl(140, 100%, 50%);
+  --color-accent-dim: hsl(140, 80%, 35%);
+  --color-accent-glow: hsla(140, 100%, 50%, 0.2);
+  --color-accent-bright: hsl(140, 100%, 65%);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+}
+
+/* ── Stealth Black Theme ── */
+[data-theme="stealth-black"] {
+  --color-bg:         #050505;
+  --color-bg-subtle:  #0a0a0a;
+  --color-surface:    #141414;
+  --color-surface-2:  #1e1e1e;
+  --color-border:     rgba(255, 255, 255, 0.1);
+  --color-border-bright: rgba(255, 255, 255, 0.25);
+  --color-accent:     hsl(215, 20%, 75%);
+  --color-accent-dim: hsl(215, 15%, 50%);
+  --color-accent-glow: hsla(215, 20%, 75%, 0.15);
+  --color-accent-bright: hsl(0, 0%, 95%);
+  --shadow-glow: 0 0 20px var(--color-accent-glow);
+}

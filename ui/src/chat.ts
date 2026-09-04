@@ -11,6 +11,8 @@ interface StreamCallbacks {
   onText: (content: string) => void;
   onToolStart: (name: string, args: Record<string, unknown>) => void;
   onToolResult: (name: string, result: string) => void;
+  onCommandApproval?: (data: { approvalId: string; command: string; dir: string }) => void;
+  onTaskPlan?: (data: { tasks: Array<{ id: string; title: string; status: 'pending' | 'in_progress' | 'completed' }>; progressPct: number }) => void;
   onError: (message: string) => void;
   onDone: () => void;
 }
@@ -105,6 +107,16 @@ function handleEvent(
         data['name'] as string,
         data['result'] as string,
       );
+      break;
+    case 'command_approval':
+      if (callbacks.onCommandApproval) {
+        callbacks.onCommandApproval(data as any);
+      }
+      break;
+    case 'task_plan':
+      if (callbacks.onTaskPlan) {
+        callbacks.onTaskPlan(data as any);
+      }
       break;
     case 'error':
       callbacks.onError(data['message'] as string);

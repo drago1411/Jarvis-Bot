@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JARVIS Calculator</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="calculator">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>J.A.R.V.I.S. Calculator</span>
+    </div>
+
+    <div class="display">
+      <div class="previous" id="previous"></div>
+      <div class="current" id="current">0</div>
+    </div>
+
+    <div class="keys">
+      <button class="key danger" data-action="clear">AC</button>
+      <button class="key danger" data-action="sign">&plusmn;</button>
+      <button class="key danger" data-action="percent">%</button>
+      <button class="key op" data-op="/">&divide;</button>
+
+      <button class="key" data-digit="7">7</button>
+      <button class="key" data-digit="8">8</button>
+      <button class="key" data-digit="9">9</button>
+      <button class="key op" data-op="*">&times;</button>
+
+      <button class="key" data-digit="4">4</button>
+      <button class="key" data-digit="5">5</button>
+      <button class="key" data-digit="6">6</button>
+      <button class="key op" data-op="-">&minus;</button>
+
+      <button class="key" data-digit="1">1</button>
+      <button class="key" data-digit="2">2</button>
+      <button class="key" data-digit="3">3</button>
+      <button class="key op" data-op="+">+</button>
+
+      <button class="key wide" data-digit="0">0</button>
+      <button class="key" data-action="dot">.</button>
+      <button class="key equals" data-action="equals">=</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

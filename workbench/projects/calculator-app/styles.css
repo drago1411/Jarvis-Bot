@@ -1,0 +1,102 @@
+:root {
+  --bg: #0b0f14;
+  --panel: #121a24;
+  --panel-2: #0f1620;
+  --display: #e8f1ff;
+  --muted: #8aa0b8;
+  --accent: #34d399;
+  --accent-2: #38bdf8;
+  --danger: #f87171;
+  --key: #1b2531;
+  --key-hover: #233142;
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(1200px 600px at 20% -10%, rgba(56, 189, 248, 0.10), transparent 60%),
+    radial-gradient(900px 500px at 90% 110%, rgba(52, 211, 153, 0.10), transparent 60%),
+    var(--bg);
+  color: var(--display);
+  padding: 16px;
+}
+
+.calculator {
+  width: 100%;
+  max-width: 340px;
+  background: linear-gradient(160deg, var(--panel), var(--panel-2));
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 22px;
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  padding-left: 4px;
+}
+
+.dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.display {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 18px 16px;
+  text-align: right;
+  margin-bottom: 14px;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+.previous {
+  color: var(--muted);
+  font-size: 16px;
+  min-height: 20px;
+  word-break: break-all;
+}
+
+.current {
+  font-size: 40px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.1;
+  word-break: break-all;
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.key {
+  padding: 0;
+  height: 62px;
+  border: none;
+  border-radius: 14px;
+  background: var(--key);
+  color: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  cursor:

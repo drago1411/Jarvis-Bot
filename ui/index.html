@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="J.A.R.V.I.S. — AI Developer Assistant" />
   <title>J.A.R.V.I.S.</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
@@ -21,20 +23,38 @@
     <!-- Header -->
     <header class="hud-header" id="hud-header">
       <div class="hud-logo">
-        <div class="arc-reactor" aria-hidden="true">
+        <div class="arc-reactor" id="arc-reactor" aria-hidden="true">
           <div class="arc-core"></div>
           <div class="arc-ring"></div>
         </div>
         <h1 class="hud-title">J.A.R.V.I.S.</h1>
       </div>
       <div class="hud-status">
+        <!-- Theme Selector -->
+        <select class="theme-select" id="theme-select" aria-label="Theme selector">
+          <option value="arc-blue">Arc Blue</option>
+          <option value="stark-red">Mark VII (Red/Gold)</option>
+          <option value="matrix-green">Cyber Matrix</option>
+          <option value="stealth-black">Stealth</option>
+        </select>
         <div class="status-indicator" id="status-indicator">
           <span class="status-dot" id="status-dot"></span>
           <span class="status-text" id="status-text">Connecting...</span>
         </div>
         <span class="hud-model" id="hud-model"></span>
+        <!-- Mobile sidebar toggle -->
+        <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar">☰</button>
       </div>
     </header>
+
+    <!-- Live Market Ticker Strip -->
+    <div class="market-ticker-strip" id="market-ticker-strip">
+      <span class="ticker-item"><span class="ticker-label">BTC:</span> <span class="ticker-val" id="tick-btc">$—</span></span>
+      <span class="ticker-item"><span class="ticker-label">ETH:</span> <span class="ticker-val" id="tick-eth">$—</span></span>
+      <span class="ticker-item"><span class="ticker-label">SOL:</span> <span class="ticker-val" id="tick-sol">$—</span></span>
+      <span class="ticker-item"><span class="ticker-label">GOLD:</span> <span class="ticker-val" id="tick-gold">—</span></span>
+      <span class="ticker-item"><span class="ticker-label">USD/INR:</span> <span class="ticker-val" id="tick-usdinr">—</span></span>
+    </div>
 
     <!-- Main content area -->
     <main class="hud-main">
@@ -58,35 +78,113 @@
         </div>
       </div>
 
-      <!-- Agent activity sidebar -->
+      <!-- Agent activity & project sidebar -->
       <aside class="activity-panel" id="activity-panel">
-        <h2 class="panel-title">Agent Activity</h2>
-        <div class="activity-list" id="activity-list">
-          <div class="activity-empty">No activity yet</div>
+        <h2 class="panel-title">Active Agent</h2>
+        <div class="agent-badge" id="active-agent-badge">
+          <span class="agent-dot"></span>
+          <span id="active-agent-name">ORCHESTRATOR</span>
         </div>
+
         <div class="panel-divider"></div>
-        <h2 class="panel-title">System</h2>
+
+        <div class="panel-header-row">
+          <h2 class="panel-title">Mission Plan</h2>
+          <span class="plan-progress-badge" id="plan-progress-badge">0%</span>
+        </div>
+        <div class="meter-bar" style="margin-bottom: 0.5rem;"><div class="meter-fill" id="meter-plan" style="width: 0%; background: var(--color-accent);"></div></div>
+        <div class="plan-list" id="plan-list">
+          <div class="activity-empty">No active mission plan</div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <h2 class="panel-title">Tool Execution</h2>
+        <div class="activity-list" id="activity-list">
+          <div class="activity-empty">Standing by...</div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <div class="panel-header-row">
+          <h2 class="panel-title">My Projects</h2>
+          <span class="project-count" id="project-count">0</span>
+        </div>
+        <div class="projects-list" id="projects-list">
+          <div class="activity-empty">No projects built yet</div>
+        </div>
+
+        <div class="panel-divider"></div>
+
+        <h2 class="panel-title">System Telemetry</h2>
         <div class="system-stats" id="system-stats">
           <div class="stat-row">
-            <span class="stat-key">Status</span>
-            <span class="stat-val" id="sys-status">—</span>
+            <span class="stat-key">CPU</span>
+            <span class="stat-val" id="telemetry-cpu">0%</span>
           </div>
+          <div class="meter-bar"><div class="meter-fill" id="meter-cpu" style="width: 0%"></div></div>
+
+          <div class="stat-row">
+            <span class="stat-key">RAM</span>
+            <span class="stat-val" id="telemetry-ram">0 / 0 GB</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="meter-ram" style="width: 0%"></div></div>
+
+          <div class="stat-row">
+            <span class="stat-key">Disk D:</span>
+            <span class="stat-val" id="telemetry-disk">—</span>
+          </div>
+          <div class="meter-bar"><div class="meter-fill" id="meter-disk" style="width: 0%"></div></div>
+
+          <div class="stat-row">
+            <span class="stat-key">Uptime</span>
+            <span class="stat-val" id="telemetry-uptime">—</span>
+          </div>
+
           <div class="stat-row">
             <span class="stat-key">Model</span>
             <span class="stat-val" id="sys-model">—</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-key">Tools</span>
-            <span class="stat-val" id="sys-tools">8</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-key">Messages</span>
-            <span class="stat-val" id="sys-messages">0</span>
           </div>
         </div>
       </aside>
 
     </main>
+
+    <!-- Dangerous Command Confirmation Modal -->
+    <div class="approval-overlay hidden" id="approval-modal">
+      <div class="approval-card">
+        <div class="approval-header">
+          <span class="approval-badge">⚠️ SECURITY OVERRIDE REQUIRED</span>
+          <h3>Command Execution Approval</h3>
+        </div>
+        <p class="approval-desc">JARVIS is requesting permission to execute the following shell command:</p>
+        <div class="approval-code-block">
+          <span class="approval-dir" id="approval-dir">cwd: workbench/projects</span>
+          <code id="approval-cmd">command here</code>
+        </div>
+        <div class="approval-actions">
+          <button class="approval-btn btn-deny" id="approval-deny-btn">🚫 DENY</button>
+          <button class="approval-btn btn-approve" id="approval-approve-btn">🛡️ APPROVE</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Preview Modal -->
+    <div class="preview-modal hidden" id="preview-modal">
+      <div class="preview-header">
+        <div class="preview-title">
+          <span class="preview-icon">⚡</span>
+          <span id="preview-project-name">Project Preview</span>
+        </div>
+        <div class="preview-actions">
+          <a href="#" target="_blank" class="preview-btn" id="preview-external-btn">Open in New Tab ↗</a>
+          <button class="preview-close-btn" id="preview-close-btn">✕</button>
+        </div>
+      </div>
+      <div class="preview-body">
+        <iframe id="preview-iframe" src="about:blank" sandbox="allow-scripts allow-same-origin allow-modals"></iframe>
+      </div>
+    </div>
 
     <!-- Input area -->
     <footer class="hud-input" id="hud-input">
@@ -101,6 +199,14 @@
             spellcheck="false"
             aria-label="Message JARVIS"
           />
+          <button type="button" class="mic-btn" id="mic-btn" aria-label="Voice input" title="Hold to speak">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+              <line x1="12" y1="19" x2="12" y2="23"></line>
+              <line x1="8" y1="23" x2="16" y2="23"></line>
+            </svg>
+          </button>
           <button type="submit" class="send-btn" id="send-btn" aria-label="Send message">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <line x1="22" y1="2" x2="11" y2="13"></line>
@@ -121,6 +227,9 @@
     </footer>
 
   </div>
+
+  <!-- Toast Notifications -->
+  <div class="toast-container" id="toast-container"></div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

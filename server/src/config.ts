@@ -11,11 +11,23 @@ export const config = {
   /** Groq API key */
   groqApiKey: process.env.GROQ_API_KEY || '',
 
-  /** Primary model for orchestrator (70B for planning/reasoning) */
+  /** Gemini API key (optional fallback for 1M context / zero rate-limits) */
+  geminiApiKey: process.env.GEMINI_API_KEY || '',
+
+  /** Ollama base URL (local offline fallback) */
+  ollamaBaseUrl: process.env.OLLAMA_BASE_URL || 'http://127.0.0.1:11434/v1',
+
+  /** Primary model for orchestrator */
   model: process.env.JARVIS_MODEL || 'llama-3.3-70b-versatile',
 
   /** Fallback model for simple tasks */
   fallbackModel: process.env.JARVIS_FALLBACK_MODEL || 'llama-3.1-8b-instant',
+
+  /** Gemini model */
+  geminiModel: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
+
+  /** Ollama model */
+  ollamaModel: process.env.OLLAMA_MODEL || 'qwen2.5-coder:7b',
 
   /** Server port */
   port: parseInt(process.env.JARVIS_PORT || '3000', 10),

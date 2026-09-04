@@ -4,7 +4,7 @@ import type { ChatCompletionMessageParam } from 'openai/resources/chat/completio
  * A single event streamed from the server to the UI via SSE.
  */
 export interface StreamEvent {
-  type: 'text' | 'tool_start' | 'tool_result' | 'error' | 'done';
+  type: 'text' | 'tool_start' | 'tool_result' | 'task_plan' | 'error' | 'done';
   data: Record<string, unknown>;
 }
 
@@ -17,13 +17,21 @@ export interface ChatMessage {
 }
 
 /**
+ * Context passed to tool execution (per-request state such as approval callbacks).
+ */
+export interface ToolExecutionContext {
+  requestApproval?: (command: string, dir: string) => Promise<boolean>;
+  emitTaskPlan?: (plan: { tasks: Array<{ id: string; title: string; status: 'pending' | 'in_progress' | 'completed' }>; progressPct: number }) => void;
+}
+
+/**
  * A tool definition that agents can use.
  */
 export interface ToolDefinition {
   name: string;
   description: string;
   parameters: Record<string, unknown>;
-  execute: (args: Record<string, unknown>) => Promise<string>;
+  execute: (args: Record<string, unknown>, context?: ToolExecutionContext) => Promise<string>;
 }
 
 /**

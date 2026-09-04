@@ -1,0 +1,16 @@
+{
+  "name": "J.A.R.V.I.S. Developer Assistant",
+  "short_name": "JARVIS",
+  "description": "Iron Man-Grade Autonomous AI Developer Assistant",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060913",
+  "theme_color": "#00d4ff",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}

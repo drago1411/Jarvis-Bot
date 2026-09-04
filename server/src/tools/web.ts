@@ -15,7 +15,85 @@ const BROWSER_HEADERS = {
 };
 
 /**
- * Helper: Search Google News RSS (never CAPTCHA-blocked, completely free).
+ * Category-specific live RSS news feeds (free, real-time, zero rate-limiting).
+ */
+const NEWS_FEEDS: Record<string, string[]> = {
+  world: [
+    'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+    'https://feeds.bbci.co.uk/news/world/rss.xml',
+  ],
+  tech: [
+    'https://feeds.arstechnica.com/arstechnica/index',
+    'https://news.ycombinator.com/rss',
+    'https://www.theverge.com/rss/index.xml',
+  ],
+  business: [
+    'https://search.cnbc.com/rs/search/view.html?partnerId=2000&keywords=markets&sort=date',
+    'https://www.livemint.com/rss/markets',
+  ],
+  india: [
+    'https://news.google.com/rss?hl=en-IN&gl=IN&ceid=IN:en',
+    'https://www.thehindu.com/news/national/feeder/default.rss',
+  ],
+};
+
+/**
+ * Helper: Parse news items from any XML/RSS string.
+ */
+function parseRSSItems(xml: string, limit: number = 5): string[] {
+  const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
+  const results: string[] = [];
+
+  for (let i = 0; i < Math.min(items.length, limit); i++) {
+    const item = items[i];
+    if (!item) continue;
+
+    const title = (item.match(/<title>([\s\S]*?)<\/title>/)?.[1] || '')
+      .replace(/<!\[CDATA\[|\]\]>/g, '')
+      .replace(/<[^>]+>/g, '')
+      .trim();
+
+    const pubDate = (item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] || '').trim();
+    const cleanDate = pubDate ? pubDate.split(' ').slice(0, 4).join(' ') : '';
+    const desc = (item.match(/<description>([\s\S]*?)<\/description>/)?.[1] || '')
+      .replace(/<!\[CDATA\[|\]\]>/g, '')
+      .replace(/<[^>]+>/g, '')
+      .slice(0, 160)
+      .trim();
+
+    if (title) {
+      results.push(`• **${title}**${cleanDate ? ` (${cleanDate})` : ''}${desc ? `\n  ${desc}...` : ''}`);
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Helper: Fetch and aggregate live category news.
+ */
+async function fetchCategoryNews(category: string): Promise<string | null> {
+  const feeds = NEWS_FEEDS[category.toLowerCase()];
+  if (!feeds || feeds.length === 0) return null;
+
+  for (const feedUrl of feeds) {
+    try {
+      const res = await fetch(feedUrl, { headers: BROWSER_HEADERS });
+      if (!res.ok) continue;
+      const xml = await res.text();
+      const parsed = parseRSSItems(xml, 6);
+      if (parsed.length > 0) {
+        return `Top Live Headlines in ${category.toUpperCase()}:\n\n${parsed.join('\n\n')}`;
+      }
+    } catch {
+      continue;
+    }
+  }
+  return null;
+}
+
+/**
+ * Helper: Search Google News RSS for specific topics (never CAPTCHA-blocked).
  */
 async function searchGoogleNewsRSS(query: string): Promise<string | null> {
   try {
@@ -24,20 +102,8 @@ async function searchGoogleNewsRSS(query: string): Promise<string | null> {
     if (!res.ok) return null;
 
     const xml = await res.text();
-    const items = xml.match(/<item>[\s\S]*?<\/item>/g) || [];
-    if (items.length === 0) return null;
-
-    const results: string[] = [];
-    for (let i = 0; i < Math.min(items.length, 5); i++) {
-      const item = items[i];
-      if (!item) continue;
-      const title = (item.match(/<title>([\s\S]*?)<\/title>/)?.[1] || '').replace(/<!\[CDATA\[|\]\]>/g, '').trim();
-      const pubDate = (item.match(/<pubDate>([\s\S]*?)<\/pubDate>/)?.[1] || '').trim();
-      if (title) {
-        results.push(`• **${title}** (${pubDate})`);
-      }
-    }
-    return results.length > 0 ? results.join('\n\n') : null;
+    const items = parseRSSItems(xml, 5);
+    return items.length > 0 ? items.join('\n\n') : null;
   } catch {
     return null;
   }
@@ -177,7 +243,23 @@ async function webSearchHandler(args: Record<string, unknown>): Promise<string> 
     return '❌ Error: Search query is empty.';
   }
 
-  // 1. Check if it's a gold or silver query
+  // 1. Check if it's a category news query (e.g. "tech news", "world news", "business news", "india news")
+  const categoryMatch = query.match(/\b(tech|technology|ai|world|global|business|market|markets|finance|india)\s*(news|headlines|updates)?\b/i);
+  if (categoryMatch) {
+    const rawCat = categoryMatch[1]?.toLowerCase() || '';
+    let mappedCat: string | null = null;
+    if (['tech', 'technology', 'ai'].includes(rawCat)) mappedCat = 'tech';
+    else if (['world', 'global'].includes(rawCat)) mappedCat = 'world';
+    else if (['business', 'market', 'markets', 'finance'].includes(rawCat)) mappedCat = 'business';
+    else if (['india'].includes(rawCat)) mappedCat = 'india';
+
+    if (mappedCat && query.trim().split(/\s+/).length <= 4) {
+      const catNews = await fetchCategoryNews(mappedCat);
+      if (catNews) return catNews;
+    }
+  }
+
+  // 2. Check if it's a gold or silver query
   if (/gold\s*(price|rate)/i.test(query)) {
     const metalPrice = await getMetalPrice('gold');
     if (metalPrice) return metalPrice;
@@ -187,7 +269,7 @@ async function webSearchHandler(args: Record<string, unknown>): Promise<string> 
     if (metalPrice) return metalPrice;
   }
 
-  // 2. Check if it's an exchange rate query
+  // 3. Check if it's an exchange rate query
   const rateMatch = query.match(/([a-z]{3})\s+to\s+([a-z]{3})/i);
   if (rateMatch && rateMatch[1] && rateMatch[2]) {
     const rate = await getExchangeRate(rateMatch[1].toUpperCase(), rateMatch[2].toUpperCase());
